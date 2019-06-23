@@ -1,10 +1,8 @@
 package com.workflow.prod.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -21,17 +19,6 @@ public class Team {
 
 	@Column(name="team_name")
 	private String teamName;
-	
-	@OneToOne(mappedBy = "postgres_teamvo", cascade = CascadeType.ALL)
-    private User user;
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
 
 	public Long getTeamId() {
 		return teamId;

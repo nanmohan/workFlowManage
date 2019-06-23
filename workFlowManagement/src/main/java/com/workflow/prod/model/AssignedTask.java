@@ -15,47 +15,36 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(Include.NON_NULL)
 @Entity
-@Table(name = "task", schema = "work_flow")
-public class Task {
+@Table(name = "assigned_task", schema = "work_flow")
+public class AssignedTask {
 	
 	@Id
-	@Column(name="task_id")
-	private Long taskId;
-
-	@Column(name="task_name")
-	private String taskName;
+	@Column(name="id")
+	private Long id;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "status_id")
-    private Status status;
+    @JoinColumn(name = "task_id")
+    private Task task;
 	
 	@JsonBackReference
 	@ManyToOne	
-    @JoinColumn(name="task_owner", nullable=false)
+    @JoinColumn(name="assigned_user", nullable=false)
     private User user;
 
-	public Long getTaskId() {
-		return taskId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setTaskId(Long taskId) {
-		this.taskId = taskId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getTaskName() {
-		return taskName;
+	public Task getTask() {
+		return task;
 	}
 
-	public void setTaskName(String taskName) {
-		this.taskName = taskName;
-	}
-
-	public Status getStatus() {
-		return status;
-	}
-
-	public void setStatus(Status status) {
-		this.status = status;
+	public void setTask(Task task) {
+		this.task = task;
 	}
 
 	public User getUser() {
