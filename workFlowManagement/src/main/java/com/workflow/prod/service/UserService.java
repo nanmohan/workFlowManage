@@ -1,5 +1,6 @@
 package com.workflow.prod.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -19,6 +20,16 @@ public class UserService {
 	public User getUserById(int userId) {
 		User obj = userRepository.findById((long) userId).get();
 		return obj;
+	}
+	
+	public User getUserByName(String userName) {
+		Iterable<User> allUser = this.findAllUser();
+		for(User user: allUser) {
+			if(user.getUserName().equals(userName)) {
+				return user;
+			}
+		}
+		return null;		
 	}
 
 	public Iterable<User> findAllUser() {

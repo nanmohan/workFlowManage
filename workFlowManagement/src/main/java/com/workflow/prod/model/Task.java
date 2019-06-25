@@ -32,7 +32,7 @@ public class Task {
 	@JsonBackReference
 	@ManyToOne	
     @JoinColumn(name="task_owner", nullable=false)
-    private User user;
+    private User taskOwner;
 
 	public Long getTaskId() {
 		return taskId;
@@ -58,11 +58,12 @@ public class Task {
 		this.status = status;
 	}
 
-	public User getUser() {
-		return user;
+	public User getTaskOwner() {
+		return taskOwner;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setTaskOwner(User taskOwner) {
+		this.taskOwner = taskOwner;
 	}
+
 }
