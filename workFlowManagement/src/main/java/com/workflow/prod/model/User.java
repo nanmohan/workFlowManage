@@ -43,7 +43,7 @@ public class User {
     private List<AssignedTask> assignedTask;
 
 	@JsonManagedReference
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="taskOwner")
     private List<Task> task;
 
 	public Long getUserId() {

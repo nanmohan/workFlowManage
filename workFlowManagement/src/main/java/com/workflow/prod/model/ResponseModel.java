@@ -1,7 +1,5 @@
 package com.workflow.prod.model;
 
-import java.util.List;
-
 public class ResponseModel {
 	private int status;
 	
