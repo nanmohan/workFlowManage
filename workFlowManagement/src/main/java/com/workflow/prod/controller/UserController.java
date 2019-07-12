@@ -3,9 +3,11 @@ package com.workflow.prod.controller;
 import java.util.List;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +28,7 @@ import com.workflow.prod.service.UserService;
 import io.swagger.annotations.Api;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/user")	
 @Api(value = "USER INFO", tags = "USER")
 public class UserController {
 	
@@ -38,8 +40,7 @@ public class UserController {
         return userService.findAllUser();
     }
 	
-	@PostMapping(path = "/{userName}/login/{password}")
-	@CrossOrigin(origins = "http://localhost:8080")
+	@PostMapping(path = "/{userName}/login/{password}")	
 	public ResponseEntity<Object> login(@PathVariable("userName") String userName, @PathVariable("password") String password) {
 		Iterable<User> users = userService.findAllUser();
 		for(User user:users) {
@@ -69,6 +70,5 @@ public class UserController {
 			user.setUserId(rand.nextLong());			
 		}
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.updateUser(user));
-    }
-
+    }	
 }

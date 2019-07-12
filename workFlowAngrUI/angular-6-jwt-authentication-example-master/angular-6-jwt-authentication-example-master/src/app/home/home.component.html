@@ -1,9 +1,69 @@
-﻿<h1>Home</h1>
-<p>You're logged in with Angular 6 & JWT!!</p>
-<div>
-    Users from secure api end point:
-    <ul>
-        <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-    </ul>
+﻿<h1>DashBoard</h1>
+<p> Welcome {{user.userName}} </p>
+
+<div class="card mb-3"  style="width: 440px">
+        
+        <div *ngIf="isUser; else NotUser">
+                <tr *ngFor="let dispObj of user.assignedTask">
+                        <table class="card-body table">
+                                <thead>
+                                <tr>
+                                    <th>Task Id</th>        
+                                    <th>Task Name</th>
+                                    <th>Status</th>
+                                    <th>User</th>         
+                                    <th>Complete</th>
+                                </tr>
+                                </thead> 
+                                 <tbody>
+                                 <tr>
+                                        <td>{{dispObj.task.taskId}}</td>
+                                        <td>{{dispObj.task.taskName}}</td>           
+                                        <td>{{dispObj.task.status.statusName}}</td>  
+                                        <td>{{user.userName}}</td> 
+                                        <td><input type="checkbox"  (change)="checkValue($event.target.checked? 'on' : 'off',dispObj.task.taskId)" > </td>
+                                 </tr>                     
+       
+            </tbody>
+        </table>
+                
+            </div>
+        <ng-template #NotUser>
+                <table class="card-body tableManager">
+                        <thead>
+                        <tr>
+                            <th>Task Id</th>
+                            <th>Task Name</th>
+                            <th>Status</th>
+                            <th>User</th>         
+                       
+                        </tr>
+                        </thead> 
+                <tr *ngFor="let dispObj of user.task">
+                        <td>{{dispObj.taskId}}</td>
+                        <td>{{dispObj.taskName}}</td>           
+                        <td>{{dispObj.status.statusName}}</td>  
+                        <div *ngIf="dispObj.status.statusName != 'ASSIGNED'; else selected"><td><select>
+                                <option *ngFor="let user of users" >
+                                   {{user.userName}}
+                                </option>
+                        </select></td></div>
+                        <ng-template #selected>
+                                <td><select>
+                                        <option *ngFor="let user of users" [value]="user.assignedTask.Id">
+                                           {{user.userName}}
+                                        </option>
+                                </select></td>
+
+                            </ng-template>
+                            
+                    </tr>        
+                </tbody>
+            </table>
+        </ng-template>   
 </div>
-<p><a [routerLink]="['/login']">Logout</a></p>
+<p ><button class="btn btn-primary" (click)="saveTask($event)">
+Save     </button> 
+<button class="btn btn-primary" [routerLink]="['/login']">
+        Logout     </button> 
+</p>

@@ -9,6 +9,6 @@ export class User {
     password: string;
     role:Role;
     team:Team;
-    assignedTask: AssignedTask;
-    task:Task;
+    assignedTask: AssignedTask[];
+    task:Task[];
 }

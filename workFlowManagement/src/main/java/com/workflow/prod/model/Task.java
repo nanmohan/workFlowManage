@@ -28,7 +28,7 @@ public class Task {
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "status_id")
     private Status status;
-	
+
 	@JsonBackReference
 	@ManyToOne	
     @JoinColumn(name="task_owner", nullable=false)
