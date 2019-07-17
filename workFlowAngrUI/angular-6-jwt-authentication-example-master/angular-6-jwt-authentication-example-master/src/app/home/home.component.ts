@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 //import {MatTableDataSource} from '@angular/material';
 
 import { User } from '../_models';
@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
     user: User;   
     users : User[];   
     isUser:boolean;
+    isChanged : boolean;
     isDisabled : boolean;
     savedTask=new Map<number, string>();
     
@@ -39,9 +40,36 @@ export class HomeComponent implements OnInit {
     }
    public checkValue(checked:string,taskId:number):void{
      this.savedTask [taskId]=checked;
-     console.log(this.savedTask);
+    
     }
     public saveTask():void{
-              console.log(this.savedTask);
+        this.isChanged = false
+        console.log("inside save");
+        if(this.isUser){
+            console.log("inside first if");
+            this.user.assignedTask.forEach(element => {
+                console.log(element.task.taskName);
+                console.log(this.savedTask);
+                if(this.savedTask[element.task.taskId] == "on"){
+                    console.log("inside second if");
+                    this.isChanged=true;
+                    element.task.status.statusId = 3;
+                    element.task.status.statusName ="COMPLETED";
+                    console.log("i'm gonna save");
+                }
+            });
+        }else{
+            this.user.task.forEach(element => {
+                if(this.saveTask[element.taskId] ){
+                    this.isChanged=true;
+                }
+            });
+        }
+        if(this.isChanged){
+            console.log(this.user);
+            this.userService.saveUser(this.user).subscribe(user=>{
+                this.user = user;
+            });
+        }
        }
 }

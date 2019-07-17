@@ -1,11 +1,13 @@
 package com.workflow.prod.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.workflow.prod.model.ResponseModel;
 import com.workflow.prod.model.User;
 import com.workflow.prod.service.UserService;
@@ -62,13 +67,13 @@ public class UserController {
         return userService.getUserById(id);
     }
 	
-	@PutMapping()
-    public ResponseEntity<Object> updateUser(@RequestBody @Valid User user){
+	@PutMapping(path = {"/save"})
+    public ResponseEntity<Object> updateUser(@RequestBody @Valid User user) {
 		if(user.getUserId()==null)
 		{
 			Random rand = new Random(); 
 			user.setUserId(rand.nextLong());			
 		}
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.updateUser(user));
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(userService.save(user));
     }	
 }

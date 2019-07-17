@@ -1,13 +1,11 @@
 package com.workflow.prod.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.workflow.prod.model.AssignedTask;
 import com.workflow.prod.model.User;
 import com.workflow.prod.repository.UserRepository;
 
@@ -36,7 +34,8 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public User updateUser(@Valid User user) {
+	@Transactional
+	public User save(User user) {		
 		return userRepository.save(user);
 	}
 	

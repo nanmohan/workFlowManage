@@ -21,7 +21,7 @@
                                         <td>{{dispObj.task.taskName}}</td>           
                                         <td>{{dispObj.task.status.statusName}}</td>  
                                         <td>{{user.userName}}</td> 
-                                        <td><input type="checkbox"  (change)="checkValue($event.target.checked? 'on' : 'off',dispObj.task.taskId)" > </td>
+                                        <td><input type="checkbox"  (change)="checkValue($event.target.checked? 'on' : 'off' ,dispObj.task.taskId)" > </td>
                                  </tr>                     
        
             </tbody>
@@ -42,8 +42,9 @@
                 <tr *ngFor="let dispObj of user.task">
                         <td>{{dispObj.taskId}}</td>
                         <td>{{dispObj.taskName}}</td>           
-                        <td>{{dispObj.status.statusName}}</td>  
-                        <div *ngIf="dispObj.status.statusName != 'ASSIGNED'; else selected"><td><select>
+                        <td>{{dispObj.status.statusName}}</td>
+                        <td>{{dispObj.assignedUser.userName}}</td>  
+                        <!-- <div *ngIf="dispObj.status.statusName != 'ASSIGNED'; else selected"><td><select>
                                 <option *ngFor="let user of users" >
                                    {{user.userName}}
                                 </option>
@@ -56,13 +57,13 @@
                                 </select></td>
 
                             </ng-template>
-                            
+                             -->
                     </tr>        
                 </tbody>
             </table>
         </ng-template>   
 </div>
-<p ><button class="btn btn-primary" (click)="saveTask($event)">
+<p ><button class="btn btn-primary" (click)="saveTask()">
 Save     </button> 
 <button class="btn btn-primary" [routerLink]="['/login']">
         Logout     </button> 

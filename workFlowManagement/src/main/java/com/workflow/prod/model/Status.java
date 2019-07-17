@@ -1,8 +1,11 @@
 package com.workflow.prod.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -13,10 +16,12 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Status {
 
 	@Id
+	@Column(name="status_id")
 	private Long statusId;
 
+	@Column(name="status_name")
 	private String statusName;
-
+	
 	public Long getStatusId() {
 		return statusId;
 	}
