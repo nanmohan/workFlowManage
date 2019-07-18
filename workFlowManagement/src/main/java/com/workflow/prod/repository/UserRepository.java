@@ -11,18 +11,4 @@ import com.workflow.prod.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long>{
-	
-	  @Transactional(timeout = 10)
-	  @Override
-	  <S extends User> S save(S s);
-	  
-	/*
-	 * @Transactional
-	 * 
-	 * @Modifying(clearAutomatically = true)
-	 * 
-	 * @Query("UPDATE Task t SET t.status_id=:statusId where t.task_id=:taskId") int
-	 * updateStatus(@Param("statusId") Long statusId, @Param("taskId") Long taskId);
-	 */
-
 }

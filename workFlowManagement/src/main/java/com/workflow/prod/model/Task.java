@@ -29,18 +29,9 @@ public class Task {
     @JoinColumn(name = "status_id")
     private Status status;
 
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "assigned_user")
-    private User assignedUser;
+	@Column(name="user_id")
+    private Long assignedUserId;
 	
-	public User getAssignedUser() {
-		return assignedUser;
-	}
-
-	public void setAssignedUser(User assignedUser) {
-		this.assignedUser = assignedUser;
-	}
-
 	@JsonBackReference
 	@ManyToOne	
     @JoinColumn(name="task_owner", nullable=false)
@@ -52,6 +43,14 @@ public class Task {
 
 	public void setTaskId(Long taskId) {
 		this.taskId = taskId;
+	}
+
+	public Long getAssignedUserId() {
+		return assignedUserId;
+	}
+
+	public void setAssignedUserId(Long assignedUserId) {
+		this.assignedUserId = assignedUserId;
 	}
 
 	public String getTaskName() {

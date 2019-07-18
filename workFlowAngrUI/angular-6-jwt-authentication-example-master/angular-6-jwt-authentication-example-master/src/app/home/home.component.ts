@@ -15,15 +15,9 @@ export class HomeComponent implements OnInit {
     isChanged : boolean;
     isDisabled : boolean;
     savedTask=new Map<number, string>();
+    userMap = new Map<number, string>();
     
     constructor(private userService: UserService) {}
-
-    /*dispObjPopulate(currentUser: User, allUsers:User[] ){
-        currentUser.task.forEach(currentTask => {
-            currentAssignTask : AssignedTask[];
-            currentAssignTask = allUsers.find(x => x. == this.personId);
-        });
-    }*/
 
     ngOnInit() {
         this.user =JSON.parse( localStorage.getItem('currentUser'));           
@@ -31,8 +25,15 @@ export class HomeComponent implements OnInit {
             this.isDisabled = true;
             this.isUser =false;  
             this.userService.getAll().pipe(first()).subscribe(users => { 
-                this.users = users;                 
+                this.users = users;  
+                users.forEach(user => {
+                    this.userMap.set(user.userId,user.userName);
+                })               
             });
+            console.log(this.userMap);
+            this.userMap.forEach((value: string, key: number) => {
+                console.log(key, value);
+              });
      
         }else{
             this.isUser =true;
@@ -42,6 +43,12 @@ export class HomeComponent implements OnInit {
      this.savedTask [taskId]=checked;
     
     }
+
+    
+    public userFilter(id:number) {
+        return this.users.filter(user => user.userId == id);
+      }
+
     public saveTask():void{
         this.isChanged = false
         console.log("inside save");

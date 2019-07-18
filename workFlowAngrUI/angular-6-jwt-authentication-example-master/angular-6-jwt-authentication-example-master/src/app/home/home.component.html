@@ -27,7 +27,7 @@
             </tbody>
         </table>
                 
-            </div>
+            </div> 
         <ng-template #NotUser>
                 <table class="card-body tableManager">
                         <thead>
@@ -43,7 +43,10 @@
                         <td>{{dispObj.taskId}}</td>
                         <td>{{dispObj.taskName}}</td>           
                         <td>{{dispObj.status.statusName}}</td>
-                        <td>{{dispObj.assignedUser.userName}}</td>  
+                        <td><select> 
+                                <option  ng-model="dispObj.userId" ng-options="user.userId as user.userName for user in users">
+                                </option>
+                        </select></td> 
                         <!-- <div *ngIf="dispObj.status.statusName != 'ASSIGNED'; else selected"><td><select>
                                 <option *ngFor="let user of users" >
                                    {{user.userName}}

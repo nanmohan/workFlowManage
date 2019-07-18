@@ -6,6 +6,6 @@ export class Task{
     taskId:number;
     taskName: string;
     taskOwner : User;
-    assignedUser: User;
-    status : Status;
+    status : Status;    
+    userId: number;
 }
